@@ -1,0 +1,25 @@
+name: Deploy Node js on oracle cloud
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Deploy to Oracle Cloud
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        # Required inputs
+        host: ${{ secrets.ORACLE_CLOUD_HOST }}
+        username: ${{ secrets.ORACLE_CLOUD_USERNAME }}
+        key: ${{ secrets.ORACLE_CLOUD_SSH_KEY }}
+        script: |
+          cd /nodejs-application-deploy-github-action/
+          git pull origin master
+          docker compose up -d --build
