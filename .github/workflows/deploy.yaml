@@ -20,6 +20,6 @@ jobs:
         username: ${{ secrets.ORACLE_CLOUD_USERNAME }}
         key: ${{ secrets.ORACLE_CLOUD_SSH_KEY }}
         script: |
-          cd /nodejs-application-deploy-github-action/
+          cd nodejs-application-deploy-github-action
           git pull origin master
           docker compose up -d --build
