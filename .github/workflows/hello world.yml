@@ -1,0 +1,31 @@
+name: exe2
+
+on: 
+ push:
+  branches:
+    - master
+ pull_request:
+   branches:
+     - master
+ workflow_dispatch:
+
+jobs:
+  hello:  
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Hello World
+        run: echo "Hello World."
+        shell: bash
+
+  goodbye:  
+    runs-on: ubuntu-latest
+    steps:
+      - name: GoodBy World
+        run: echo "Good Bye Cruel World."
+        shell: bash
+      
+    
+
+
+  
