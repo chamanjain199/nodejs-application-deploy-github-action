@@ -1,20 +1,25 @@
 name: Create a comment on a new issue
 
 on:
- issues:
-   types: [opened]
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
 
 jobs:
- commet-with-action:
-  runs-on: ubuntu-latest
-  steps:
-    - name: dump github context
-      run:  echo '${{ toJSON(github.event) }} |  jq
-      shell: bash
-    - name: Create comment
-      uses: peter-evans/create-or-update-comment@v5
-      with:
-          issue-number: ${{ toJSON(github.event.issue.number) }} 
+  comment-with-action:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Dump GitHub context
+        run: echo '${{ toJSON(github.event) }}' | jq
+        shell: bash
+
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v5
+        with:
+          issue-number: ${{ github.event.issue.number }}
           body: |
             This is a multi-line test comment
             - With GitHub **Markdown** :sparkles:
@@ -22,4 +27,3 @@ jobs:
 
             [1]: https://github.com/peter-evans/create-or-update-comment
           reactions: '+1'
-  
